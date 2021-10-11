@@ -2,66 +2,45 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-    render() {
-      return (
-        <button className="square">
-          {/* TODO */}
-        </button>
-      );
-    }
+class Header extends React.Component {
+  render() {
+    return (
+      <div></div>
+    )
   }
-  
-  class Board extends React.Component {
-    renderSquare(i) {
-      return <Square />;
-    }
-  
-    render() {
-      const status = 'Next player: X';
-  
-      return (
-        <div>
-          <div className="status">{status}</div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+}
+
+class ArticleContainer extends React.Component {
+  render() {
+    return (
+      <div className="article-container">
+        <a href={this.props.articleUrl} target="_blank" rel="noreferrer">
+          <img className="cover-img" src={this.props.img} alt={this.props.title}/>
+          <div className="article-info">
+            <span className="title">{this.props.title}</span>
           </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
-      );
-    }
+        </a>
+      </div>
+    )
   }
-  
-  class Game extends React.Component {
-    render() {
-      return (
-        <div className="game">
-          <div className="game-board">
-            <Board />
-          </div>
-          <div className="game-info">
-            <div>{/* status */}</div>
-            <ol>{/* TODO */}</ol>
-          </div>
-        </div>
-      );
-    }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1 className="title">
+          HotchPotch
+        </h1>
+        <ArticleContainer img="http://img.chuapp.com//wp-content/Picture/2021-08-07/610e241129483.jpg" title="测试标题" articleUrl="https://www.chuapp.com/article/288172.html"/>
+      </div>
+    );
   }
+}
   
   // ========================================
   
   ReactDOM.render(
-    <Game />,
+    <App />,
     document.getElementById('root')
   );
