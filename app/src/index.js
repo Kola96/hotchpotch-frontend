@@ -24,6 +24,7 @@ class ArticleContainer extends React.Component {
           <img className="cover" src={this.props.coverImgUrl} alt={this.props.title} />
           <div className="article-info">
             <div className="title">
+              <span className="source">{this.props.source}</span>
               <span>{this.props.title}</span>
             </div>
             <div className="desc">
@@ -44,22 +45,22 @@ class ContainerList extends React.Component {
     }
   }
 
+  request() {
+    const url = `http://localhost:8080/api/article?page=${this.props.page || ""}&size=${this.props.size || ""}&source=${this.props.source || ""}&tags=${this.props.tags || ""}&title=${this.props.title || ""}`;
+    axios.get(url)
+      .then((res) => {
+        this.setState({ data: res.data.data.articles });
+      })
+  }
+
   componentDidMount() {
     this.request();
   }
 
-  request = () => {
-    axios.get("http://localhost:8080/api/article")
-      .then((res) => {
-        this.setState({ data: res.data.data });
-      })
-  }
-
   render() {
-    let data = this.state.data;
     return (
       <div className="container-list">
-        {data.map(e => <ArticleContainer key={e.id} {...e}></ArticleContainer>)}
+        {this.state.data.map(e => <ArticleContainer key={e.id} {...e}></ArticleContainer>)}
       </div>
     )
   }
@@ -70,13 +71,11 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <ContainerList />
+        <ContainerList page={1} size={18} />
       </div>
     );
   }
 }
-
-// ========================================
 
 ReactDOM.render(
   <App />,
