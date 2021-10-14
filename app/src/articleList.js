@@ -63,7 +63,7 @@ class ArticleCardList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="main-body">
                 <div className="container-list">
                     {this.state.data.map(e => <ArticleContainer key={e.id} {...e}></ArticleContainer>)}
                 </div>
