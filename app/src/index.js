@@ -9,7 +9,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
-                <ArticleCardList host={"http://localhost:8080"} size={18} />
+                <ArticleCardList host={"http://16.162.46.216:8080"} size={18} />
             </div>
         );
     }
