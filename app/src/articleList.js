@@ -4,7 +4,33 @@ import ReactPaginate from 'react-paginate'
 import './index.css';
 
 class ArticleContainer extends React.Component {
-    render() {
+
+    containerWithoutImg = () => {
+        return (
+            <div className="article-container">
+                <a href={this.props.articleUrl} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }} target="_blank" rel="noreferrer">
+                    <div className="article-info" style={{ padding: '15px 10px 15px 10px' }}>
+                        <div className="title">
+                            <span>{this.props.title}</span>
+                        </div>
+                        <div className="desc">
+                            <span>{this.props.description}</span>
+                        </div>
+                        <div className="detail" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '15px' }}>
+                            <div className="left">
+                                {this.props.source}
+                            </div>
+                            <div className="right">
+                                {this.props.publishTime}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        )
+    }
+
+    containerWithImg = () => {
         return (
             <div className="article-container">
                 <a href={this.props.articleUrl} target="_blank" rel="noreferrer">
@@ -30,6 +56,14 @@ class ArticleContainer extends React.Component {
                 </a>
             </div>
         )
+    }
+
+    render() {
+        if (this.props.coverImgUrl !== "") {
+            return (<this.containerWithImg />)
+        } else {
+            return (<this.containerWithoutImg />)
+        }
     }
 }
 

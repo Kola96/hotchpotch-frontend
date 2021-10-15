@@ -7,7 +7,7 @@ class Header extends React.Component {
             <div className="header">
                 <div className="logo-container">
                     <img src="logo.png" alt="logo" style={{ width: "48px", paddingRight: "10px" }} />
-                    <span style={{ fontSize: "2em", fontWeight: "bold" }}>今天看点啥</span>
+                    <span style={{ fontSize: "1.8em", fontWeight: "500" }}>今天看什么</span>
                 </div>
             </div>
         )
