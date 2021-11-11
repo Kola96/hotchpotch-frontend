@@ -1,21 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { ArticleCardList } from './articleList';
-import { Header } from './header';
 
-class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <Header />
-                <ArticleCardList host={"http://16.162.46.216:8080"} size={18} />
-            </div>
-        );
-    }
-}
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import App from './scene/ArticleApp';
+import { Demo } from './scene/Login';
 
 ReactDOM.render(
-    <App />,
+    <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/index" element={<App />} />
+            <Route path="/login" element={<Demo />} />
+        </Routes>
+    </BrowserRouter>,
     document.getElementById('root')
 );

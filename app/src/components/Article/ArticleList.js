@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate'
-import './index.css';
+import { Pagination } from 'antd';
+import './ArticleList.css';
 
 class ArticleContainer extends React.Component {
 
@@ -86,8 +86,8 @@ class ArticleCardList extends React.Component {
             })
     }
 
-    gotoPage = (data) => {
-        let page = data.selected;
+    gotoPage = page => {
+        console.log("111");
         this.request(page = page + 1);
     }
 
@@ -101,13 +101,12 @@ class ArticleCardList extends React.Component {
                 <div className="container-list">
                     {this.state.data.map(e => <ArticleContainer key={e.id} {...e}></ArticleContainer>)}
                 </div>
-                <div className="pagination-container">
-                    <ReactPaginate
-                        pageCount={this.state.totalPage}
-                        onPageChange={this.gotoPage}
-                        containerClassName={'pagination'}
-                        previousLabel={'⬅'}
-                        nextLabel={'➡'}
+                <div className="pagination">
+                    <Pagination
+                        defaultCurrent={1}
+                        current={this.state.page}
+                        totalPage={this.state.totalPage}
+                        onChange={this.gotoPage}
                     />
                 </div>
             </div>

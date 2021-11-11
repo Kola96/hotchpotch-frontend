@@ -1,0 +1,10 @@
+.header {
+    display: flex;
+    box-shadow: 0 0 0.5em #181818;
+}
+
+.header .logo-container {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
