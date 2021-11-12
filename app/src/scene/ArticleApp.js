@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArticleCardList } from '../components/ArticleList';
-import { Header } from '../components/Header';
+import { ArticleCardList } from '../components/ArticleList.js';
+import { Header } from '../components/Header.js';
 
 class App extends React.Component {
     render() {
