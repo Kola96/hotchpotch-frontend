@@ -1,7 +1,6 @@
 import React from 'react';
-import './ArticleApp.css';
-import { ArticleCardList } from '../components/Article/ArticleList';
-import { Header } from '../components/header';
+import { ArticleCardList } from '../components/ArticleList';
+import { Header } from '../components/Header';
 
 class App extends React.Component {
     render() {
@@ -14,4 +13,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export { App };
