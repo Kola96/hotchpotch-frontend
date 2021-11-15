@@ -1,0 +1,20 @@
+.login-form-forgot {
+    float: right;
+  }
+
+.ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+
+.ant-form-item-control-input-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-form-button {
+    width: 48%;
+  }
+
+.register-form-button {
+    width: 48%;
+}
