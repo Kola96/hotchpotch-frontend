@@ -1,10 +1,18 @@
 .header {
     display: flex;
+    justify-content: space-between;
     box-shadow: 0 0 0.5em #181818;
 }
 
-.header .logo-container {
+.logo-container {
     display: flex;
-    margin: 10px;
+    margin: 10px 10px 10px 16px;
     align-items: center;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
 }

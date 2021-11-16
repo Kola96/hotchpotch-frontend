@@ -42,7 +42,7 @@ class ArticleCardList extends React.Component {
                 <div className="container-list">
                     {
                         this.state.data.map(e =>
-                            <a key={e.id} href={e.articleUrl}>
+                            <a key={e.id} href={e.articleUrl} target="_blank" rel="noreferrer">
                                 <Card
                                     cover={e.coverImgUrl ? <CoverImg
                                         alt={e.title}

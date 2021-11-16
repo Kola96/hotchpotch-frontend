@@ -3,16 +3,14 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Component } from 'react';
 import axios from 'axios';
 import { JSEncrypt } from 'jsencrypt'
+import toFormData from '../utils/FormDataUtils';
 import './css/LoginForm.css';
-
+import { useNavigate } from 'react-router-dom'
 
 class LoginForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            publicKey: "",
-        }
+    redirect = () => {
+        this.props.navigate("/");
     }
 
     onFinish = (user) => {
@@ -22,9 +20,8 @@ class LoginForm extends Component {
             var encrypt = new JSEncrypt();
             encrypt.setPublicKey(e.data.data);
             user.password = encrypt.encrypt(user.password);
-            console.log(user.password);
-            axios.post(loginUrl, user).then(e => {
-                console.log(e);
+            axios.post(loginUrl, toFormData(user)).then(e => {
+                this.redirect();
             });
         });
     }
@@ -91,4 +88,11 @@ class LoginForm extends Component {
     }
 };
 
-export { LoginForm };
+const LoginFormWithNavigate = () => {
+    let navigate = useNavigate();
+    return (
+        <LoginForm navigate={navigate} />
+    )
+}
+
+export { LoginFormWithNavigate as LoginForm };
