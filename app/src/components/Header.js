@@ -72,7 +72,9 @@ class Header extends Component {
                             <a href="/login">
                                 <Button type="primary">登录</Button>
                             </a>
-                            <Button style={{ margin: '0 15px 0 15px' }} >注册</Button>
+                            <a href="/register">
+                                <Button style={{ margin: '0 15px 0 15px' }} >注册</Button>
+                            </a>
                         </>
                     }
                 </div>

@@ -83,9 +83,11 @@ class LoginForm extends Component {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         登录
                     </Button>
-                    <Button type="ghost" className="register-form-button">
-                        注册
-                    </Button>
+                    <a href="/register">
+                        <Button type="ghost" className="register-form-button">
+                            注册
+                        </Button>
+                    </a>
                 </Form.Item>
             </Form>
         );
