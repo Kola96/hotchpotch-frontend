@@ -83,11 +83,11 @@ class LoginForm extends Component {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         登录
                     </Button>
-                    <a href="/register">
-                        <Button type="ghost" className="register-form-button">
+                    <Button type="ghost" className="register-form-button">
+                        <a href="/register">
                             注册
-                        </Button>
-                    </a>
+                        </a>
+                    </Button>
                 </Form.Item>
             </Form>
         );
