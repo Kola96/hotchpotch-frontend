@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Component } from 'react';
 import axios from 'axios';
@@ -21,7 +21,11 @@ class LoginForm extends Component {
             encrypt.setPublicKey(e.data.data);
             user.password = encrypt.encrypt(user.password);
             axios.post(loginUrl, toFormData(user)).then(e => {
-                this.redirect();
+                if (e.data.code === 200) {
+                    this.redirect();
+                } else {
+                    message.error(e.data.msg);
+                }
             });
         });
     }
