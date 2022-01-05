@@ -20,7 +20,7 @@ class ArticleCardList extends React.Component {
     request(page, keyword, source) {
         const url = `${window.config.baseUrl}/api/article?page=${page || ""}&size=${this.props.size || ""}&source=${source || ""}&tags=${keyword || ""}&title=${keyword || ""}`;
         axios.get(url).then((res) => {
-            res.data.data.articles.map(a => this.state.data.push(a));
+            res.data.data.list.map(a => this.state.data.push(a));
             this.setState({ totalPage: res.data.data.totalPage });
             this.setState({ loading: false });
             this.setState({ currentPage: page })
