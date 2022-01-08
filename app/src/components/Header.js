@@ -68,7 +68,6 @@ class Header extends Component {
 
     componentDidMount = () => {
         this.request();
-        console.log(this.props.hiddenUser);
     };
 
     render() {
