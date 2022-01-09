@@ -24,7 +24,7 @@ const LogoutAppWithNavigate = () => {
     let navigate = useNavigate();
     return (
         <LogoutApp navigate={navigate} />
-    )
+    );
 }
 
 export { LogoutAppWithNavigate as LogoutApp };

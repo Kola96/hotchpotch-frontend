@@ -54,6 +54,7 @@ class LoginForm extends Component {
                         placeholder="用户名"
                     />
                 </Form.Item>
+
                 <Form.Item
                     name="password"
                     rules={[
@@ -69,14 +70,11 @@ class LoginForm extends Component {
                         placeholder="密码"
                     />
                 </Form.Item>
+
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>记住我</Checkbox>
                     </Form.Item>
-
-                    <a className="login-form-forgot" style={{ display: 'none' }} href="/">
-                        忘记密码
-                    </a>
                 </Form.Item>
 
                 <Form.Item>

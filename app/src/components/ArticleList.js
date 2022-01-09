@@ -67,7 +67,7 @@ class ArticleCardList extends React.Component {
                     加载更多
                 </Button>
             </div>
-        )
+        );
     }
 }
 

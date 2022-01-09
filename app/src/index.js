@@ -7,6 +7,7 @@ import { LogoutApp } from './scene/LogoutApp';
 import { RegisterApp } from './scene/RegisterApp';
 import { SpiderAdminApp } from './scene/SpiderAdmin/SpiderAdminApp';
 import axios from 'axios';
+import './axiosSetting'
 
 axios.defaults.withCredentials = true;
 

@@ -21,7 +21,7 @@ const CoverImg = props => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export { CoverImg }

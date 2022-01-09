@@ -5,9 +5,9 @@ const SpiderAdminApp = () => {
     return (
         <>
             <Header />
-            <SpiderJobList pageNum={1} pageSize={10} />
+            <SpiderJobList />
         </>
     );
-}
+};
 
 export { SpiderAdminApp };
