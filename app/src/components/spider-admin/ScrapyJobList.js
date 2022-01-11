@@ -1,8 +1,14 @@
-import { message, Table, Col, Button } from "antd";
+import {
+    ReloadOutlined,
+} from '@ant-design/icons';
+import { message, Table, Col, Row, Button, Typography, Divider, Modal, Space, Select } from "antd";
 import axios from "axios";
 import React from "react";
+import toFormData from '../../utils/FormDataUtils';
 
 const { Column } = Table;
+const { Title } = Typography;
+const { Option } = Select;
 
 class ScrapyJobList extends React.Component {
     constructor(props) {
@@ -10,22 +16,26 @@ class ScrapyJobList extends React.Component {
         this.state = ({
             pendingJobs: [],
             runningJobs: [],
-            finishedJobs: []
+            finishedJobs: [],
+            spiderList: [],
+            isModalVisible: false,
+            logText: null
         });
+        this.runSpider = this.runSpider.bind(this);
     }
 
     request() {
         axios.get(`${window.config.baseUrl}/api/scrapy/listJobs?project=default`).then((res) => {
             if (res.data.code === 200) {
                 res.data.data.running.map(e => {
-                    const href = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
-                    e.actions = <Button type="primary" href={href}>日志</Button>;
+                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
+                    e.actions = <Button type="primary" onClick={() => { this.getLogText(url) }}>日志</Button>;
                     return null;
                 });
 
                 res.data.data.finished.map(e => {
-                    const href = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
-                    e.actions = <Button type="primary" href={href}>日志</Button>;
+                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
+                    e.actions = <Button type="primary" onClick={() => { this.getLogText(url) }}>日志</Button>;
                     return null;
                 });
                 res.data.data.finished.reverse();
@@ -40,16 +50,85 @@ class ScrapyJobList extends React.Component {
         });
     }
 
+    showModal = () => {
+        this.setState({ isModalVisible: true });
+    };
+
+    handleCancel = () => {
+        this.setState({ isModalVisible: false });
+    };
+
+    getLogText(url) {
+        axios.get(url).then((res) => {
+            if (res.data.code === 200) {
+                this.setState({
+                    logText: res.data.data,
+                    isModalVisible: true
+                });
+            } else {
+                message.error(res.data.msg);
+            }
+        });
+    }
+
+    getSpiderList() {
+        const url = `${window.config.baseUrl}/api/scrapy/listSpiders?project=default`;
+        axios.get(url).then((res) => {
+            if (res.data.code === 200) {
+                this.setState({ spiderList: res.data.data });
+            } else {
+                this.setState({ spiderList: [] });
+                message.error(res.data.msg);
+            }
+        });
+    }
+
+    runSpider() {
+        const url = `${window.config.baseUrl}/api/scrapy/startSpider`;
+        axios.post(url, toFormData({ project: "default", spider: this.state.runSpiderName })).then((res) => {
+            if (res.data.code === 200) {
+                message.success("启动成功");
+                this.request();
+            } else {
+                message.error(res.data.msg);
+            }
+        });
+    }
+
     componentDidMount() {
         this.request();
+        this.getSpiderList();
     }
 
     render() {
         return (
             <div style={{ margin: "0 28px 0 16px" }}>
                 <Col>
+                    <Row justify="end">
+                        <Space size="middle">
+                            <Select
+                                style={{ width: "180px" }}
+                                showSearch
+                                placeholder="选择一个爬虫"
+                                optionFilterProp="children"
+                                onChange={(res) => { this.setState({ runSpiderName: res }) }}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }>
+                                {
+                                    this.state.spiderList.map(e =>
+                                        <Option key={e} value={e}>{e}</Option>
+                                    )
+                                }
+                            </Select>
+                            <Button type="primary" onClick={this.runSpider}>手动执行</Button>
+                            <Divider type="vertical" />
+                            <Button type="primary" onClick={() => this.request()} icon={<ReloadOutlined />} style={{ width: "60px" }} />
+                        </Space>
+                    </Row>
+                    <Divider style={{ margin: "16px 0 8px 0" }} />
                     <Col>
-                        <h4>即将运行</h4>
+                        <Title level={5}>即将运行</Title>
                         <Table
                             dataSource={this.state.pendingJobs}
                             rowKey={columns => columns.id}
@@ -61,7 +140,7 @@ class ScrapyJobList extends React.Component {
                         </Table>
                     </Col>
                     <Col>
-                        <h4>运行中</h4>
+                        <Title level={5}>运行中</Title>
                         <Table
                             dataSource={this.state.runningJobs}
                             rowKey={columns => columns.id}
@@ -75,7 +154,7 @@ class ScrapyJobList extends React.Component {
                         </Table>
                     </Col>
                     <Col>
-                        <h4>已完成</h4>
+                        <Title level={5}>已完成</Title>
                         <Table
                             dataSource={this.state.finishedJobs}
                             rowKey={columns => columns.id}
@@ -90,6 +169,15 @@ class ScrapyJobList extends React.Component {
                         </Table>
                     </Col>
                 </Col>
+                <Modal
+                    title="日志"
+                    width={"80%"}
+                    visible={this.state.isModalVisible}
+                    onCancel={this.handleCancel}
+                    footer={null}
+                >
+                    <span style={{ whiteSpace: "pre-line" }}>{this.state.logText}</span>
+                </Modal>
             </div>
         );
     }
