@@ -3,9 +3,9 @@ import React from 'react';
 import { MyHeader } from '../../components/Header';
 import { SpiderJobList } from '../../components/spider-admin/SpiderJobList';
 import { ScrapyJobList } from '../../components/spider-admin/ScrapyJobList';
-import './SpiderAdminApp.css'
+import './AdminApp.css'
 
-class SpiderAdminApp extends React.Component {
+class AdminApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,4 +39,4 @@ class SpiderAdminApp extends React.Component {
     }
 };
 
-export { SpiderAdminApp };
+export { AdminApp };

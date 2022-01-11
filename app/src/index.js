@@ -5,7 +5,7 @@ import { ArticleApp } from './scene/ArticleApp';
 import { LoginApp } from './scene/LoginApp';
 import { LogoutApp } from './scene/LogoutApp';
 import { RegisterApp } from './scene/RegisterApp';
-import { SpiderAdminApp } from './scene/SpiderAdmin/SpiderAdminApp';
+import { AdminApp } from './scene/Admin/AdminApp';
 import axios from 'axios';
 import './axiosSetting'
 
@@ -19,7 +19,7 @@ ReactDOM.render(
             <Route exact path="/login" element={<LoginApp />} />
             <Route exact path="/register" element={<RegisterApp />} />
             <Route exact path="/logout" element={<LogoutApp />} />
-            <Route exact path="/spiderAdmin" element={<SpiderAdminApp />} />
+            <Route exact path="/admin" element={<AdminApp />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')
