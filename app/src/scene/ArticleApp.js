@@ -1,10 +1,10 @@
 import { ArticleCardList } from '../components/ArticleList.js';
-import { Header } from '../components/Header.js';
+import { MyHeader } from '../components/Header.js';
 
 const ArticleApp = () => {
     return (
         <div>
-            <Header />
+            <MyHeader />
             <ArticleCardList size={20} />
         </div>
     );

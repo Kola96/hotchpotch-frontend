@@ -145,7 +145,7 @@ class SpiderJobList extends React.Component {
 
     render() {
         return (
-            <div style={{ margin: "16px" }}>
+            <div style={{ margin: "0 28px 0 16px" }}>
                 <Row justify="end">
                     <Space size="middle">
                         <Select
@@ -179,13 +179,13 @@ class SpiderJobList extends React.Component {
                         pageSize: this.props.pageSize,
                         onChange: this.onChange
                     }}>
-                    <Column width="120px" title="ID" dataIndex="id" />
+                    <Column width="30px" title="ID" dataIndex="id" />
                     <Column title="爬虫名" dataIndex="spiderName" />
-                    <Column title="cron" dataIndex="cron" />
-                    <Column width="120px" title="状态" dataIndex="status" />
-                    <Column width="200px" title="创建时间" dataIndex="createTime" />
-                    <Column width="200px" title="更新时间" dataIndex="updateTime" />
-                    <Column width="300px" title="操作" dataIndex="actions" />
+                    <Column width="180px" title="cron" dataIndex="cron" />
+                    <Column title="状态" dataIndex="status" />
+                    <Column title="创建时间" dataIndex="createTime" />
+                    <Column title="更新时间" dataIndex="updateTime" />
+                    <Column title="操作" dataIndex="actions" />
                 </Table>
             </div>
         );
