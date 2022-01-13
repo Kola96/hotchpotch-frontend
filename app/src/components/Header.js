@@ -80,7 +80,7 @@ class Header extends Component {
             if (e.data.code === 200) {
                 this.setState({ isLogin: true });
                 this.setState({ nickname: e.data.data.nickname });
-                if ("administrator".indexOf(e.data.data.roleList) !== -1) {
+                if (e.data.data.roleList.indexOf("administrator") !== -1) {
                     this.setState({ userMenu: adminMenu });
                 } else {
                     this.setState({ userMenu: normalMenu });
@@ -88,7 +88,6 @@ class Header extends Component {
             } else {
                 this.setState({ isLogin: false });
             }
-
         });
     }
 

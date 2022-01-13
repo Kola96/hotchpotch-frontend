@@ -75,7 +75,7 @@ class SpiderJobList extends React.Component {
 
     runSpider() {
         const url = `${window.config.baseUrl}/api/scrapy/startSpider`;
-        axios.post(url, toFormData({ project: "default", spider: this.state.runSpiderName })).then((res) => {
+        axios.post(url, toFormData({ project: "hcpcSpider", spider: this.state.runSpiderName })).then((res) => {
             if (res.data.code === 200) {
                 message.success("启动成功");
             } else {
@@ -123,7 +123,7 @@ class SpiderJobList extends React.Component {
     }
 
     getSpiderList() {
-        const url = `${window.config.baseUrl}/api/scrapy/listSpiders?project=default`;
+        const url = `${window.config.baseUrl}/api/scrapy/listSpiders?project=hcpcSpider`;
         axios.get(url).then((res) => {
             if (res.data.code === 200) {
                 this.setState({ spiderList: res.data.data });

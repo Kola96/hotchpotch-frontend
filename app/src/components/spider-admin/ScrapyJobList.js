@@ -25,16 +25,16 @@ class ScrapyJobList extends React.Component {
     }
 
     request() {
-        axios.get(`${window.config.baseUrl}/api/scrapy/listJobs?project=default`).then((res) => {
+        axios.get(`${window.config.baseUrl}/api/scrapy/listJobs?project=hcpcSpider`).then((res) => {
             if (res.data.code === 200) {
                 res.data.data.running.map(e => {
-                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
+                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=hcpcSpider&spider=${e.spider}&jobId=${e.id}`;
                     e.actions = <Button type="primary" onClick={() => { this.getLogText(url) }}>日志</Button>;
                     return null;
                 });
 
                 res.data.data.finished.map(e => {
-                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=default&spider=${e.spider}&jobId=${e.id}`;
+                    const url = `${window.config.baseUrl}/api/scrapy/getLog?project=hcpcSpider&spider=${e.spider}&jobId=${e.id}`;
                     e.actions = <Button type="primary" onClick={() => { this.getLogText(url) }}>日志</Button>;
                     return null;
                 });
@@ -72,7 +72,7 @@ class ScrapyJobList extends React.Component {
     }
 
     getSpiderList() {
-        const url = `${window.config.baseUrl}/api/scrapy/listSpiders?project=default`;
+        const url = `${window.config.baseUrl}/api/scrapy/listSpiders?project=hcpcSpider`;
         axios.get(url).then((res) => {
             if (res.data.code === 200) {
                 this.setState({ spiderList: res.data.data });
@@ -85,7 +85,7 @@ class ScrapyJobList extends React.Component {
 
     runSpider() {
         const url = `${window.config.baseUrl}/api/scrapy/startSpider`;
-        axios.post(url, toFormData({ project: "default", spider: this.state.runSpiderName })).then((res) => {
+        axios.post(url, toFormData({ project: "hcpcSpider", spider: this.state.runSpiderName })).then((res) => {
             if (res.data.code === 200) {
                 message.success("启动成功");
                 this.request();
