@@ -32,7 +32,7 @@ class HotwordsCard extends React.Component {
 
     render() {
         return (
-            <div style={{ width: '220px', margin: '24px 24px 0 0' }} >
+            <div style={{ margin: '24px 24px 0 0' }} >
                 <Affix offsetTop={12}>
                     <div>
                         <Card title='一小时热词' style={{ marginBottom: '24px' }}>
@@ -64,4 +64,4 @@ class HotwordsCard extends React.Component {
     }
 }
 
-export { HotwordsCard as TodayHotwordsCard };
+export { HotwordsCard };

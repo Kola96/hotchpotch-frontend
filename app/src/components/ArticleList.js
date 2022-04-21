@@ -39,7 +39,7 @@ class ArticleCardList extends React.Component {
 
     render() {
         return (
-            <div className="main-body" style={{ flex: '1' }}>
+            <div className="main-body" style={{ width: '85%' }}>
                 <div className="container-list">
                     {
                         this.state.data.map(e =>
@@ -56,7 +56,7 @@ class ArticleCardList extends React.Component {
                                         }}
                                         src={e.coverImgUrl} /> : null}
                                     loading={this.state.loading}
-                                    style={{ display: 'flex', margin: '24px' }}
+                                    style={{ display: 'flex', margin: '24px', overflow: 'hidden' }}
                                     hoverable>
                                     <Meta title={e.title} description={e.description} />
                                 </Card>
