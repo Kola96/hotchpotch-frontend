@@ -18,16 +18,17 @@ class ArticleCardList extends React.Component {
     }
 
     request(page, keyword, source) {
-        const url = `${window.config.baseUrl}/api/article?page=${page || ""}&size=${this.props.size || ""}&source=${source || ""}&tags=${keyword || ""}&title=${keyword || ""}`;
+        const url = `${window.config.baseUrl}/api/article?page=${page || ""}&size=${this.props.size || ""}&source=${source || ""}&tags=${this.props.tags || ""}&title=${keyword || ""}`;
         axios.get(url).then((res) => {
             res.data.data.list.map(a => this.state.data.push(a));
             this.setState({ totalPage: res.data.data.totalPage });
             this.setState({ loading: false });
-            this.setState({ currentPage: page })
+            this.setState({ currentPage: page });
+            this.setState({ isLast: res.data.data.totalPage === res.data.data.currentPage });
         })
     }
 
-    onClick = () => {
+    gotoNextPage = () => {
         this.setState({ loading: true });
         this.request(this.state.currentPage + 1);
     }
@@ -38,7 +39,7 @@ class ArticleCardList extends React.Component {
 
     render() {
         return (
-            <div className="main-body">
+            <div className="main-body" style={{ flex: '1' }}>
                 <div className="container-list">
                     {
                         this.state.data.map(e =>
@@ -47,10 +48,10 @@ class ArticleCardList extends React.Component {
                                     cover={e.coverImgUrl ? <CoverImg
                                         alt={e.title}
                                         source={e.source}
-                                        date={e.publishTime} width={'400px'}
-                                        isVideo={e.tags.indexOf('视频') !== -1}
+                                        date={e.publishTime}
+                                        width={'400px'}
+                                        isVideo={e.mediaType === 1}
                                         style={{
-                                            width: '400px',
                                             borderRadius: '2px 0 0 2px'
                                         }}
                                         src={e.coverImgUrl} /> : null}
@@ -63,7 +64,7 @@ class ArticleCardList extends React.Component {
                         )
                     }
                 </div>
-                <Button style={{ height: '60px' }} size='large' type='link' onClick={this.onClick} block>
+                <Button style={{ height: '60px' }} size='large' type='link' onClick={this.gotoNextPage} hidden={this.state.isLast} block>
                     加载更多
                 </Button>
             </div>
