@@ -56,7 +56,7 @@ class ArticleCardList extends React.Component {
                                         }}
                                         src={e.coverImgUrl} /> : null}
                                     loading={this.state.loading}
-                                    style={{ display: 'flex', margin: '24px', overflow: 'hidden' }}
+                                    style={{ display: 'flex', margin: '24px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
                                     hoverable>
                                     <Meta title={e.title} description={e.description} />
                                 </Card>

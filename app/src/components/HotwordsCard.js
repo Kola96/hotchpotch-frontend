@@ -32,9 +32,9 @@ class HotwordsCard extends React.Component {
 
     render() {
         return (
-            <div style={{ margin: '24px 24px 0 0' }} >
+            <div style={{ flex: '0 0 15%' }} >
                 <Affix offsetTop={12}>
-                    <div>
+                    <div style={{ margin: '24px 24px 0 0' }}>
                         <Card title='一小时热词' style={{ marginBottom: '24px' }}>
                             <Space wrap>
                                 {
